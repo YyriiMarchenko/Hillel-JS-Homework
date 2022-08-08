@@ -9,3 +9,5 @@ if (number1 > number2 && number1 > number3) {
 } else {
   console.log(`Найбільше число з трьох вказаних ${number3}`);
 }
+
+
