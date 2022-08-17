@@ -49,9 +49,17 @@ const staf = [
     phone: "+1 (840) 562-3790",
   },
 ];
+console.log(staf);
+// Копіювання масиву об'єктів
 
-// Переводимо значення балансів в число
-const newArr = staf.map((element) => {
+const base = staf.map((element) => {
+  element = { ...element };
+  return element;
+});
+
+// Переведення значення балансів в число
+
+const newArr = base.map((element) => {
   element.balance = Number(
     element.balance
       .split("")
@@ -63,27 +71,26 @@ const newArr = staf.map((element) => {
   return element;
 });
 
-// Фільтруємо значення балансу
-const newBalance = newArr.filter((element) => element.balance > 200000);
+// Фільтруємо значення балансу та формуємо масив телефонних номерів
+
+let arrPhon = [];
+
+const newBalance = newArr.filter((element) => {
+  if (element.balance > 200000) {
+    arrPhon.push(element.phone);
+    return element.phone;
+  }
+});
+
+console.log(arrPhon);
+
+// const newBalance = newArr.filter((element) => element.balance > 200000);
 
 // Сума  балансу
 const sumBalanse = newArr.reduce((prev, element) => {
   return prev + element.balance;
 }, 0);
 
-// Переведення значення балансу з числа в рядок
-const newBalance$ = newBalance.map((element) => {
-  let numArr = [...element.balance.toString()];
-  numArr.splice(0, 0, "$");
-  numArr.splice(length - 2, 0, ".");
-  numArr.splice(length - 6, 0, ",");
-
-  numArr.join("");
-  element.balance = numArr.join("");
-
-  return element;
-});
-console.dir(newBalance$);
 // Переведення значення суми балансів з числа в рядок
 
 const sumBalanseArr = [...sumBalanse.toString()];
