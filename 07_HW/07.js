@@ -33,7 +33,8 @@ function Car() {
   this.owner = new User();
   this.show = function () {
     console.log(
-      `Car: model ${this.model}, year ${this.year}, color ${this.color}   Owner: ${this.owner.name}, age ${this.owner.age} year `
+      `Car: model ${this.model}, year ${this.year}, color ${this.color} 
+    Owner: ${this.owner.name}, age ${this.owner.age} year `
     );
   };
 }

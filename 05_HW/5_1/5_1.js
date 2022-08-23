@@ -63,9 +63,10 @@ const newArr = base.map((element) => {
   element.balance = Number(
     element.balance
       .split("")
-      .map((a) => Number(a))
-      .filter((b) => b >= 0)
-      .map((a) => String(a))
+      .filter((a) => isFinite(a))
+      // .map((a) => Number(a))
+      // .filter((b) => b >= 0)
+      // .map((a) => String(a))
       .join("")
   );
   return element;
