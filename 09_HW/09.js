@@ -13,23 +13,28 @@ const images = [
   "./img/10.jpg",
 ];
 
-let page = 0;
+const picture = document.createElement("img");
+picture.setAttribute("src", "");
+document.querySelector(".slider-line").append(picture);
 
-document.querySelector(".buttons").addEventListener("click", (event) => {
-  if (event.target.className === "slider-next") {
-    document.querySelector(".slider-line").innerHTML = `<img src="${
-      images[page++]
-    }"/>`;
-    if (page >= images.length) {
-      page = 0;
+let counter = 1;
+picture.src = images[0];
+
+document.querySelectorAll(".buttons").forEach(function (element) {
+  element.addEventListener("click", (event) => {
+    if (event.target.className === "slider-next") {
+      picture.src = images[counter];
+      counter++;
+      if (counter == images.length) {
+        counter = 0;
+      }
     }
-  }
-  if (event.target.className === "slider-prev") {
-    document.querySelector(".slider-line").innerHTML = `<img src="${
-      images[--page]
-    }"/>`;
-    if (page <= 0) {
-      page = images.length;
+    if (event.target.className === "slider-prev") {
+      picture.src = images[counter - 1];
+      --counter;
+      if (counter == 0) {
+        counter = images.length;
+      }
     }
-  }
+  });
 });
