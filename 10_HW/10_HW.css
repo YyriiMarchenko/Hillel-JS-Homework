@@ -1,0 +1,15 @@
+.doneTask {
+  text-decoration: line-through;
+}
+
+.taskWrapper {
+  display: flex;
+}
+
+.errorText {
+  color: rgb(219, 5, 5);
+}
+
+form {
+  display: flex;
+}
