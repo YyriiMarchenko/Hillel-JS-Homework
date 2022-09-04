@@ -37,9 +37,11 @@ todoForm.addEventListener("submit", function (event) {
 
   const text = document.createElement("p");
   text.textContent = todoForm.elements.task.value;
+  text.classList.add("description");
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   const btn = document.createElement("button");
+  btn.classList.add("btn-delete");
   btn.innerText = "Видалити";
   taskWrapper.append(checkbox);
   taskWrapper.append(text);
