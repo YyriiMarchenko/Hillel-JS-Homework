@@ -38,7 +38,7 @@ form.elements["email"].addEventListener("input", function () {
 });
 
 form.elements["credit card"].addEventListener("input", function () {
-  const cardValidation = /\d{16}/;
+  const cardValidation = /^\d{16}$/;
   highlightValidationHint(
     document.getElementById("card validation"),
     cardValidation.test(this.value)
