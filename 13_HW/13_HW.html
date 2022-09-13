@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>13_HW</title>
+    <link rel="stylesheet" href="13_HW.css" />
+  </head>
+  <body>
+    <form name="user" class="form">
+      <h3>Add new user</h3>
+      <div>
+        <input
+          class="field"
+          name="name"
+          type="text"
+          placeholder="Name Surname"
+        />
+        <p id="name validation">
+          capital first letter of first and last name
+        </p>
+      </div>
+      <div>
+        <input
+          class="field"
+          name="phon number"
+          type="text"
+          placeholder="Your phon number"
+        />
+        <!-- </div>
+      <p id="country code"></p>
+      <div> -->
+        <p id="phone number">Enter the country code and phone number</p>
+      </div>
+      <div>
+        <input
+          class="field"
+          name="email"
+          type="text"
+          placeholder="Set your email"
+        />
+        <p id="email validation">email</p>
+      </div>
+      <div>
+        <input
+          class="field"
+          name="credit card"
+          type="text"
+          placeholder="Set number credit card"
+        />
+        <p id="card validation">credit card number must have 16 digits</p>
+      </div>
+
+      <button name="submit" type="submit">Save</button>
+    </form>
+    <div id="usersList" class="usersList"></div>
+  </body>
+  <script src="13_HW.js"></script>
+</html>
