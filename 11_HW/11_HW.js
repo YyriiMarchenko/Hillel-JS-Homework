@@ -26,6 +26,11 @@ todoForm.elements.task.addEventListener("input", function () {
     .forEach((error) => error.remove());
 });
 
+const tasksArray = [];
+
+const updateLocal = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
 todoForm.addEventListener("submit", function (event) {
   event.preventDefault();
   if (todoForm.elements.task.value.trim() === "") {
@@ -33,14 +38,29 @@ todoForm.addEventListener("submit", function (event) {
     return;
   }
 
+  const newTask = {
+    id: tasksArray.length === 0 ? 0 : tasksArray[tasksArray.length - 1].id + 1,
+    name: todoForm.elements.task.value,
+    isDone: false,
+  };
+
+  const updateLocal = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  tasksArray.push(newTask);
+  updateLocal("tasksArray", tasksArray);
+
   const taskWrapper = document.createElement("div");
   taskWrapper.classList.add("taskWrapper");
+  taskWrapper.setAttribute("data-id", newTask.id);
 
   const text = document.createElement("p");
   text.textContent = todoForm.elements.task.value;
   text.classList.add("description");
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
+  checkbox.setAttribute("value", "isDone");
   const btn = document.createElement("button");
   btn.classList.add("btn-delete");
   btn.innerText = "Видалити";
@@ -52,16 +72,53 @@ todoForm.addEventListener("submit", function (event) {
   todoForm.elements.task.value = "";
 
   checkbox.addEventListener("change", function () {
+    const wrapper = this.closest(".taskWrapper");
+
+    const id = wrapper.getAttribute("data-id");
+
+    const task = tasksArray.find((taskItem) => taskItem.id == id);
+
+    task.isDone = this.checked;
     if (this.checked) {
-      this.closest(".taskWrapper").querySelector("p").classList.add("doneTask");
+      wrapper.querySelector("p").classList.add("doneTask");
       return;
     }
-    this.closest(".taskWrapper")
-      .querySelector("p")
-      .classList.remove("doneTask");
+    wrapper.querySelector("p").classList.remove("doneTask");
   });
 
   btn.addEventListener("click", function () {
     this.closest(".taskWrapper").remove();
   });
+});
+
+const select = document.querySelector("#select");
+select.addEventListener("change", function () {
+  switch (this.value) {
+    case "done":
+      tasksArray.forEach((item, i) => {
+        const element = document.querySelector(`[data-id="${i}"]`);
+        item.isDone == false
+          ? element.classList.add("hidden")
+          : element.classList.remove("hidden");
+      });
+
+      break;
+
+    case "in progress":
+      tasksArray.forEach((item, i) => {
+        const element = document.querySelector(`[data-id="${i}"]`);
+        item.isDone != false
+          ? element.classList.add("hidden")
+          : element.classList.remove("hidden");
+      });
+
+      break;
+    case "all":
+      tasksArray.forEach((item, i) => {
+        const element = document.querySelector(`[data-id="${i}"]`);
+        if (item.isDone != false || item.isDone == false) {
+          element.classList.remove("hidden");
+        }
+      });
+  }
 });

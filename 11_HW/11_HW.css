@@ -94,3 +94,7 @@ h1 {
 form {
   display: flex;
 }
+
+.hidden {
+  display: none;
+}
