@@ -1,6 +1,6 @@
 function User() {
   this.name = prompt("Select name");
-  while (this.name == "") {
+  while (!this.name) {
     alert("You don`t select name");
     this.name = prompt("Select name");
   }
@@ -9,23 +9,27 @@ function User() {
     alert("You have to select age more 18 year ");
     this.age = prompt("Select age");
   }
+  while (!isFinite(this.age)) {
+    alert("You don`t select year");
+    this.age = prompt("Select year");
+  }
 }
 
 function Car() {
   this.model = prompt("Select model");
-  while (this.model == "") {
+  while (!this.model) {
     alert("You don`t select model");
     this.model = prompt("Select model");
   }
 
   this.year = +prompt("Select year");
-  while (isFinite(this.year) == false) {
+  while (!isFinite(this.year)) {
     alert("You don`t select year");
     this.year = prompt("Select year");
   }
 
   this.color = prompt("Select color");
-  while (this.color == "") {
+  while (!this.color) {
     alert("You don`t select color");
     this.color = prompt("Select color");
   }

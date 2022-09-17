@@ -28,9 +28,6 @@ todoForm.elements.task.addEventListener("input", function () {
 
 const tasksArray = [];
 
-const updateLocal = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
-};
 todoForm.addEventListener("submit", function (event) {
   event.preventDefault();
   if (todoForm.elements.task.value.trim() === "") {
