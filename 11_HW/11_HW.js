@@ -70,11 +70,12 @@ todoForm.addEventListener("submit", function (event) {
 
   checkbox.addEventListener("change", function () {
     const wrapper = this.closest(".taskWrapper");
+    console.log(wrapper);
 
     const id = wrapper.getAttribute("data-id");
-
+    console.log(id);
     const task = tasksArray.find((taskItem) => taskItem.id == id);
-
+    console.log(task);
     task.isDone = this.checked;
     if (this.checked) {
       wrapper.querySelector("p").classList.add("doneTask");
