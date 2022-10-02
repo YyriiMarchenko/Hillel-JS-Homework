@@ -69,11 +69,17 @@ function renderList() {
       const checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
       checkbox.setAttribute("value", "isDone");
+      if (user.isDone) {
+        checkbox.setAttribute("checked", user.isDone);
+      }
       taskWrapper.append(checkbox);
 
       const text = document.createElement("p");
       text.textContent = user.name;
       text.classList.add("description");
+      if (user.isDone) {
+        text.classList.add("doneTask");
+      }
       taskWrapper.append(text);
 
       const btn = document.createElement("button");
@@ -101,9 +107,10 @@ taskList.addEventListener("click", function (event) {
 
 taskList.addEventListener("change", function (event) {
   event.target.getAttribute("type");
-  const id = event.target.closest("[data-id]").getAttribute("data-id");
+  const element = event.target.closest("[data-id]");
+  const id = element.getAttribute("data-id");
   const task = tasksArray.find((taskItem) => taskItem.id == id);
-  const element = document.querySelector(`[data-id="${id}"]`);
+
   task.isDone = event.target.checked;
 
   if (event.target.checked) {
@@ -115,7 +122,6 @@ taskList.addEventListener("change", function (event) {
   element.querySelector("p").classList.remove("doneTask");
 
   updateLocal(TASK_ARRAY, tasksArray);
-  //   renderList();
 });
 
 select.addEventListener("change", function () {
@@ -146,6 +152,5 @@ select.addEventListener("change", function () {
           element.classList.remove("hidden");
         }
       });
-      updateLocal(TASK_ARRAY, tasksArray);
   }
 });
