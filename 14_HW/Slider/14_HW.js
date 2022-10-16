@@ -13,16 +13,12 @@ picture.setAttribute("src", "");
 document.querySelector(".slider-line").append(picture);
 picture.src = images[0];
 
-const prev = document.querySelector(".slider-prev");
-const next = document.querySelector(".slider-next");
 const dots = document.querySelectorAll(".dot");
 
 let counter = 0;
 
 const activSlide = (n) => {
-  images.forEach(function () {
-    picture.src = images[n];
-  });
+  picture.src = images[n];
 };
 
 const activDot = (n) => {
@@ -35,22 +31,8 @@ const activDot = (n) => {
 const nextSlide = () => {
   if (counter == images.length - 1) {
     clearInterval(id);
-    activSlide(counter);
-    activDot(counter);
   } else {
     counter++;
-    activSlide(counter);
-    activDot(counter);
-  }
-};
-
-const prevSlide = () => {
-  if (counter == 0) {
-    counter = images.length - 1;
-    activSlide(counter);
-    activDot(counter);
-  } else {
-    counter--;
     activSlide(counter);
     activDot(counter);
   }

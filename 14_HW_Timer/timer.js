@@ -4,7 +4,6 @@ const errorClass = "error";
 
 function createErrorElement(message) {
   const errorMsg = document.createElement("p");
-  // if (errorMsg.classList.contains("errorText")) return;
   errorMsg.classList.add("errorText");
   errorMsg.textContent = message;
   return errorMsg;
@@ -17,25 +16,25 @@ function addErrorMessege(inputElement, message) {
   inputElement.closest(".fieldWrapper").append(error);
 }
 
-const todoForm = document.forms.todo;
+const timerForm = document.forms.timerdesk;
 const taskList = document.querySelector(".tasks");
 
-todoForm.elements.task.addEventListener("input", function () {
+timerForm.elements.task.addEventListener("input", function () {
   this.classList.remove(errorClass);
   this.closest(".fieldWrapper")
     .querySelectorAll(".errorText")
     .forEach((error) => error.remove());
 });
 
-todoForm.addEventListener("submit", function (event) {
+timerForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  if (todoForm.elements.task.value.trim() === "") {
-    addErrorMessege(todoForm.elements.task, "enter date");
+  if (timerForm.elements.task.value.trim() === "") {
+    addErrorMessege(timerForm.elements.task, "enter date");
     return;
   }
 
-  const endDate = new Date(todoForm.elements.task.value);
+  const endDate = new Date(timerForm.elements.task.value);
   console.log(endDate);
   let nowLoc = new Date();
 
@@ -43,7 +42,7 @@ todoForm.addEventListener("submit", function (event) {
 
   if (tLoc < 0) {
     addErrorMessege(
-      todoForm.elements.task,
+      timerForm.elements.task,
       "enter a date greater than the current one"
     );
   }
@@ -60,21 +59,21 @@ todoForm.addEventListener("submit", function (event) {
       let mins = Math.floor((t / 1000 / 60) % 60);
       let secs = Math.floor((t / 1000) % 60);
       console.log(hours);
+
       const daysVal = document.querySelector("#timer-days_val");
       const hoursVal = document.querySelector("#timer-hours_val");
       const minsVal = document.querySelector("#timer-mins_val");
       const secsVal = document.querySelector("#timer-secs_val");
       console.log(daysVal);
+
       daysVal.textContent = days;
       hoursVal.textContent = ("0" + hours).slice(-2);
       minsVal.textContent = ("0" + mins).slice(-2);
       secsVal.textContent = ("0" + secs).slice(-2);
-    }
-
-    else {
+    } else {
       clearInterval(timer);
     }
   }, 1000);
 
-  todoForm.elements.task.value = "";
+  timerForm.elements.task.value = "";
 });
